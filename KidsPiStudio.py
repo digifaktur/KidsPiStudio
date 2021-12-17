@@ -9,6 +9,7 @@ class MainWindow(Frame):
         self.notesimage=PhotoImage(file='./assets/notes.png')
         self.recordimage=PhotoImage(file='./assets/record.png')
         self.exitimage=PhotoImage(file='./assets/exit.png')
+        self.closeimage=PhotoImage(file='./assets/close.png')
         discButton = Button(self, image=self.cdimage, width=160, command=self.clickDiscButton)
         discButton.place(x=10, y=10)
         notesButton = Button(self, image=self.notesimage, width=160, command=self.clickNotesButton)
@@ -21,7 +22,7 @@ class MainWindow(Frame):
         discWindow = Toplevel(self)
         discWindow.geometry("720x320")
         discWindow.title("KidsPiStudio - CD Studio")
-        closeButton = Button(discWindow, image=self.exitimage, width=160, command=discWindow.destroy)
+        closeButton = Button(discWindow, image=self.closeimage, width=160, command=discWindow.destroy)
         closeButton.place(x=520, y=160)
     def clickNotesButton(self):
         exit()
