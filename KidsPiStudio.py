@@ -18,13 +18,18 @@ class MainWindow(Frame):
         exitButton = Button(self, image=self.exitimage, width=160, command=self.clickExitButton)
         exitButton.place(x=520, y=160)
     def clickDiscButton(self):
-        exit()
+        discWindow = Toplevel(self)
+        discWindow.geometry("720x320")
+        discWindow.title("KidsPiStudio - CD Studio")
+        closeButton = Button(discWindow, image=self.exitimage, width=160, command=discWindow.destroy)
+        closeButton.place(x=520, y=160)
     def clickNotesButton(self):
         exit()
     def clickRecordButton(self):
         exit()
     def clickExitButton(self):
         exit()
+
 
 
 root = Tk()
