@@ -25,9 +25,17 @@ class MainWindow(Frame):
         closeButton = Button(discWindow, image=self.closeimage, width=160, command=discWindow.destroy)
         closeButton.place(x=520, y=160)
     def clickNotesButton(self):
-        exit()
+        notesWindow = Toplevel(self)
+        notesWindow.geometry("720x320")
+        notesWindow.title("KidsPiStudio - MP3 Studio")
+        closeButton = Button(notesWindow, image=self.closeimage, width=160, command=notesWindow.destroy)
+        closeButton.place(x=520, y=160)
     def clickRecordButton(self):
-        exit()
+        recordWindow = Toplevel(self)
+        recordWindow.geometry("720x320")
+        recordWindow.title("KidsPiStudio - Recording Studio")
+        closeButton = Button(recordWindow, image=self.closeimage, width=160, command=recordWindow.destroy)
+        closeButton.place(x=520, y=160)
     def clickExitButton(self):
         exit()
 
@@ -38,4 +46,3 @@ app = MainWindow(root)
 root.wm_title("KidsPiStudio")
 root.geometry("720x320")
 root.mainloop()
-
