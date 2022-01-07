@@ -1,11 +1,17 @@
+import subprocess
 from tkinter import *
+from subprocess import Popen, PIPE
+from functools import partial
 
 class MainWindow(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.master = master
         self.pack(fill=BOTH, expand=1)
+        self.currentWindow = master
         self.cdimage=PhotoImage(file='./assets/cd2.png')
+        self.playcdimage=PhotoImage(file='./assets/playCd.png')
+        self.ripcdimage=PhotoImage(file='./assets/ripCd.png')
         self.notesimage=PhotoImage(file='./assets/notes.png')
         self.recordimage=PhotoImage(file='./assets/record.png')
         self.exitimage=PhotoImage(file='./assets/exit.png')
@@ -22,8 +28,24 @@ class MainWindow(Frame):
         discWindow = Toplevel(self)
         discWindow.geometry("720x320")
         discWindow.title("KidsPiStudio - CD Studio")
+        playDiscButton = Button(discWindow, image=self.playcdimage, width=160, command=self.clickPlayDiscButton)
+        playDiscButton.place(x=10, y=10)
+        ripDiscButton = Button(discWindow, image=self.ripcdimage, width=160, command=self.clickRipDiscButton)
+        ripDiscButton.place(x=10, y=160)
         closeButton = Button(discWindow, image=self.closeimage, width=160, command=discWindow.destroy)
         closeButton.place(x=520, y=160)
+    def clickPlayDiscButton(self):
+        playDiscWindow = Toplevel(self)
+        playDiscWindow.geometry("720x320")
+        playDiscWindow.title("KidsPiStudio - CD Player")
+        self.currentWindow = playDiscWindow
+        closeButton = Button(playDiscWindow, image=self.closeimage, width=160, command=self.closeWindow)
+        closeButton.place(x=520, y=160)
+    def closeWindow(self):
+        subprocess.call(['audtool', '--shutdown'])
+        self.currentWindow.destroy()
+    def clickRipDiscButton(self):
+        return
     def clickNotesButton(self):
         notesWindow = Toplevel(self)
         notesWindow.geometry("720x320")
