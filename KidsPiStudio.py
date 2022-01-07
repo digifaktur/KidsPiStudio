@@ -9,6 +9,11 @@ class MainWindow(Frame):
         self.master = master
         self.pack(fill=BOTH, expand=1)
         self.currentWindow = master
+        self.playimage = PhotoImage(file='./assets/play.png')
+        self.pauseimage = PhotoImage(file='./assets/pause.png')
+        self.stopimage = PhotoImage(file='./assets/stop.png')
+        self.previmage = PhotoImage(file='./assets/prev.png')
+        self.nextimage = PhotoImage(file='./assets/next.png')
         self.cdimage=PhotoImage(file='./assets/cd2.png')
         self.playcdimage=PhotoImage(file='./assets/playCd.png')
         self.ripcdimage=PhotoImage(file='./assets/ripCd.png')
@@ -28,18 +33,28 @@ class MainWindow(Frame):
         discWindow = Toplevel(self)
         discWindow.geometry("720x320")
         discWindow.title("KidsPiStudio - CD Studio")
-        playDiscButton = Button(discWindow, image=self.playcdimage, width=160, command=self.clickPlayDiscButton)
+        playDiscButton = Button(discWindow, image=self.playcdimage, width=160, command=self.clickPlayMediaButton)
         playDiscButton.place(x=10, y=10)
         ripDiscButton = Button(discWindow, image=self.ripcdimage, width=160, command=self.clickRipDiscButton)
         ripDiscButton.place(x=10, y=160)
         closeButton = Button(discWindow, image=self.closeimage, width=160, command=discWindow.destroy)
         closeButton.place(x=520, y=160)
-    def clickPlayDiscButton(self):
-        playDiscWindow = Toplevel(self)
-        playDiscWindow.geometry("720x320")
-        playDiscWindow.title("KidsPiStudio - CD Player")
-        self.currentWindow = playDiscWindow
-        closeButton = Button(playDiscWindow, image=self.closeimage, width=160, command=self.closeWindow)
+    def clickPlayMediaButton(self):
+        playMediaWindow = Toplevel(self)
+        playMediaWindow.geometry("720x320")
+        playMediaWindow.title("KidsPiStudio - Media Player")
+        self.currentWindow = playMediaWindow
+        mediaPlayButton = Button(playMediaWindow, image=self.playimage, width=160, command=subprocess.call(['audtool', '--playback-play']))
+        mediaPlayButton.place(x=10, y=10)
+        mediaPauseButton = Button(playMediaWindow, image=self.pauseimage, width=160, command=subprocess.call(['audtool', '--playback-pause']))
+        mediaPauseButton.place(x=180, y=10)
+        mediaStopButton = Button(playMediaWindow, image=self.stopimage, width=160, command=subprocess.call(['audtool', '--playback-stop']))
+        mediaStopButton.place(x=350, y=10)
+        mediaPrevButton = Button(playMediaWindow, image=self.previmage, width=160, command=subprocess.call(['audtool', '--playlist-advance']))
+        mediaPrevButton.place(x=10, y=160)
+        mediaNextButton = Button(playMediaWindow, image=self.nextimage, width=160, command=subprocess.call(['audtool', '--playlist-reverse']))
+        mediaNextButton.place(x=180, y=160)
+        closeButton = Button(playMediaWindow, image=self.closeimage, width=160, command=self.closeWindow)
         closeButton.place(x=520, y=160)
     def closeWindow(self):
         subprocess.call(['audtool', '--shutdown'])
