@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://web.resource.org/cc/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" id="svg2" viewBox="0 0 744 774" version="1.0">
+  <defs id="defs4">
+    <linearGradient id="linearGradient11463">
+      <stop id="stop11465" stop-color="#fff" offset="0"/>
+      <stop id="stop11467" stop-color="#fff" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <radialGradient id="radialGradient11471" xlink:href="#linearGradient11463" gradientUnits="userSpaceOnUse" cy="792.22" cx="154.85" gradientTransform="matrix(1.1429 -.24648 .33919 1.3725 -213.12 -442.84)" r="141.2"/>
+    <radialGradient id="radialGradient11475" xlink:href="#linearGradient11463" gradientUnits="userSpaceOnUse" cy="792.22" cx="154.85" gradientTransform="matrix(.78086 -.28816 .51144 1.0198 -1.1431 -238.96)" r="141.2"/>
+  </defs>
+  <g id="layer1">
+    <use id="use9684" xlink:href="#path5505" transform="translate(-.000025123 248.4)" height="1052.3622" width="744.09448" stroke="#f0e400" y="0" x="0" fill="#f0e400"/>
+    <use id="use9682" xlink:href="#path5505" transform="translate(-.000025123 186.3)" height="1052.3622" width="744.09448" stroke="#f0e400" y="0" x="0" fill="#f0e400"/>
+    <use id="use9680" xlink:href="#path5505" transform="translate(-.000025123 124.2)" height="1052.3622" width="744.09448" stroke="#f0e400" y="0" x="0" fill="#f0e400"/>
+    <use id="use9678" xlink:href="#path5505" transform="translate(-.000025123 62.1)" height="1052.3622" width="744.09448" stroke="#f0e400" y="0" x="0" fill="#f0e400"/>
+    <path id="path5505" stroke-linejoin="round" d="m733.15 192.01c-186.81 52.35-221.16 56.71-280.22 170.14-55.25 106.12-135.44 176.69-441.34 91.62" stroke="#c6001c" stroke-linecap="round" stroke-width="11.296" fill="none"/>
+    <use id="use9676" xlink:href="#path5505" transform="translate(.000025123 -.000043875)" height="1052.3622" width="744.09448" y="0" x="0" fill="none"/>
+    <path id="path1872" stroke-linejoin="round" d="m597.43 12.883c-13.69 62.801-206.45 240.74-361.48 194.26 20.54 88.68 30.04 112.63 11.09 179.29-7.96 27.99-22.63 56.4-37.06 80.04-74.04 10.87-130.67 69.92-130.67 141.08 0.004 78.86 69.57 142.88 155.29 142.88s155.29-64.02 155.29-142.88c0-52.2-30.48-97.87-75.94-122.8 1.49-10.56 5.79-33.03 18.19-78.14 20.49-74.56 11.84-103.52-7.08-133.01 107.79 12.61 216.18-43.76 253.54-102.47 18.97 34.69 13.8 73.51-6.94 138.19-12.02 37.45-35.99 91.42-53.89 129.93-62.85 6.11-111.54 48.39-111.54 99.59 0 55.38 57.02 100.34 127.27 100.34s127.27-44.96 127.27-100.34c0-33.66-21.06-63.44-53.33-81.65 32.69-59.63 54.62-122.27 65.38-177.88 1.22-109.9 27.18-150.32-75.39-266.43z" stroke="#000" stroke-linecap="round" stroke-width="17.449" fill="#2e6383"/>
+    <path id="path9686" d="m146.8 549.82c-45.61 7.09-62.804 13.85-55.489 49.01 16.349 78.57 44.649 120.76 128.26 128.62 78.82 7.41 129.74-60.88 154.79-92.35-174.87 26.93-196.26 17.4-227.56-85.28z" fill="url(#radialGradient11471)"/>
+    <path id="path11473" d="m451.84 488.65c-31.69 9.39-42.85 16.06-30.74 42.31 27.05 58.65 55.73 88.44 117.87 87.16 58.56-1.22 82.27-57.87 94.34-84.12-121.56 35.85-138.91 30.42-181.47-45.35z" fill="url(#radialGradient11475)"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Musical symbol bold</dc:title>
+        <dc:date>2009-01-29T03:32:39</dc:date>
+        <dc:description>other basic musical symbol</dc:description>
+        <dc:source>http://openclipart.org/detail/21291/musical-symbol-bold-by-alepando</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>alepando</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>how i did it</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>music</rdf:li>
+            <rdf:li>musical sound</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>sound note</rdf:li>
+            <rdf:li>svg</rdf:li>
+            <rdf:li>symbol</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
