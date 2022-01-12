@@ -1,8 +1,5 @@
 import subprocess
 from tkinter import *
-from subprocess import Popen, PIPE
-from functools import partial
-
 from MediaPlayer import MediaPlayer
 
 class MainWindow(Frame):
@@ -31,7 +28,7 @@ class MainWindow(Frame):
         discWindow = Toplevel(self)
         discWindow.geometry("720x320")
         discWindow.title("KidsPiStudio - CD Studio")
-        playDiscButton = Button(discWindow, image=self.playcdimage, width=160, command=self.clickPlayMediaButton)
+        playDiscButton = Button(discWindow, image=self.playcdimage, width=160, command=self.clickPlayMediaButton("cdda://"))
         playDiscButton.place(x=10, y=10)
         ripDiscButton = Button(discWindow, image=self.ripcdimage, width=160, command=self.clickRipDiscButton)
         ripDiscButton.place(x=10, y=160)
@@ -42,7 +39,7 @@ class MainWindow(Frame):
             self.mediaPlayer.closeWindow(self.mediaPlayer)
         self.mediaPlayer = MediaPlayer(self, path)
     def clickRipDiscButton(self):
-        return
+        rip = subprocess.Popen(["abcde", "-G", "-N"], creationflags=subprocess.DETACHED_PROCESS, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     def clickNotesButton(self):
         notesWindow = Toplevel(self)
         notesWindow.geometry("720x320")
