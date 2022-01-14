@@ -79,6 +79,7 @@ class MainWindow(Frame):
         countdownWindow.config(bg='skyblue4')
         timeLabel = Label(countdownWindow, font=('Helvetica bold', 72), text='-3', bg='skyblue4', fg='red')
         timeLabel.place(x=260, y=70)
+        countdownWindow.wait_visibility()
         date_time = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
         seconds = -3
         while seconds < 0:
