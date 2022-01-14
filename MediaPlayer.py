@@ -35,7 +35,7 @@ class MediaPlayer(Frame):
         mediaPrevButton.place(x=10, y=160)
         mediaNextButton = Button(self.playMediaWindow, image=self.nextimage, width=160, command=lambda : subprocess.call(['audtool', '--playlist-reverse']))
         mediaNextButton.place(x=180, y=160)
-        closeButton = Button(self.playMediaWindow, image=self.closeimage, width=160, command=self.closeWindow)
+        closeButton = Button(self.playMediaWindow, image=self.closeimage, width=160, command=lambda : self.closeWindow)
         closeButton.place(x=520, y=160)
     def closeWindow(self):
         subprocess.call(['killall', 'audacious'])
