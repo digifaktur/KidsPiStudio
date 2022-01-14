@@ -84,12 +84,14 @@ class MainWindow(Frame):
         seconds = -3
         while seconds < 0:
             timeLabel.config(text=str(seconds))
+            countdownWindow.update()
             sleep(1)
             seconds += 1
         subprocess.Popen(['arecord', '/home/pi/Music/Recordings/' + date_time + '.wav', '-D sysdefault:CARD=1', '-f cd', '-d ' + str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         timeLabel.config(text='0', fg='green')
         while seconds < length:
             timeLabel.config(text=str(seconds))
+            countdownWindow.update()
             sleep(1)
             seconds += 1
         countdownWindow.destroy()
