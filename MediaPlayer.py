@@ -16,7 +16,6 @@ class MediaPlayer(Frame):
         playMediaWindow = Toplevel(master)
         playMediaWindow.geometry("720x320")
         playMediaWindow.title("KidsPiStudio - Media Player")
-        playMediaWindow.protocol("WM_DELETE_WINDOW", self.closeWindow)
         self.playimage = PhotoImage(file='./assets/play.png')
         self.pauseimage = PhotoImage(file='./assets/pause.png')
         self.stopimage = PhotoImage(file='./assets/stop.png')
@@ -34,8 +33,5 @@ class MediaPlayer(Frame):
         mediaPrevButton.place(x=10, y=160)
         mediaNextButton = Button(playMediaWindow, image=self.nextimage, width=160, command=lambda : subprocess.call(['audtool', '--playlist-reverse']))
         mediaNextButton.place(x=180, y=160)
-        closeButton = Button(playMediaWindow, image=self.closeimage, width=160, command=lambda : self.closeWindow)
+        closeButton = Button(playMediaWindow, image=self.closeimage, width=160, command=playMediaWindow.destroy)
         closeButton.place(x=520, y=160)
-    def closeWindow(self):
-        subprocess.call(['killall', 'audacious'])
-        self.destroy()
