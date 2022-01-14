@@ -38,5 +38,5 @@ class MediaPlayer(Frame):
         closeButton = Button(self.playMediaWindow, image=self.closeimage, width=160, command=self.closeWindow)
         closeButton.place(x=520, y=160)
     def closeWindow(self):
-        subprocess.call(['audtool', '--shutdown'])
+        subprocess.call(['killall', 'audacious'])
         self.playMediaWindow.destroy()
