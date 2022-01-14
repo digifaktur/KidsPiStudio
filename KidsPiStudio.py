@@ -49,7 +49,7 @@ class MainWindow(Frame):
             self.mediaPlayer.closeWindow(self.mediaPlayer)
         self.mediaPlayer = MediaPlayer(self, path)
     def clickRipDiscButton(self):
-        rip = subprocess.Popen(["abcde", "-G", "-N"], creationflags=subprocess.DETACHED_PROCESS, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        rip = subprocess.Popen(["abcde", "-G", "-N"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     def clickNotesButton(self):
         notesWindow = Toplevel(self)
         notesWindow.geometry("720x320")
@@ -77,16 +77,16 @@ class MainWindow(Frame):
         countdownWindow.geometry("720x320")
         countdownWindow.title("KidsPiStudio - Audio Recording")
         countdownWindow.config(bg='skyblue4')
-        timeLabel = Label(countdownWindow, font=('Helvetica bold', 22), text='-3', bg='skyblue4', fg="red")
+        timeLabel = Label(countdownWindow, font=('Helvetica bold', 72), text='-3', bg='skyblue4', fg='red')
         timeLabel.place(x=260, y=70)
-        date_time = datetime.datetime.now().strftime("%Y%m%d_%H-%M-%S")
+        date_time = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
         for i in range (-3, -1):
-            timeLabel.config(text=i)
+            timeLabel.config(text=str(i))
             sleep(1)
-        subprocess.Popen(['arecord', date_time + '.wav', '-D sysdefault:CARD=1', '-f cd', '-d ' + str(length)], creationflags=subprocess.DETACHED_PROCESS, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        subprocess.Popen(['arecord', date_time + '.wav', '-D sysdefault:CARD=1', '-f cd', '-d ' + str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         timeLabel.config(text='0', fg='green')
         for i in range (0, length-1):
-            timeLabel.config(text=i)
+            timeLabel.config(text=str(i))
             sleep(1)
         countdownWindow.destroy()
     def clickExitButton(self):

@@ -23,7 +23,7 @@ class MediaPlayer(Frame):
         self.stopimage = PhotoImage(file='./assets/stop.png')
         self.previmage = PhotoImage(file='./assets/prev.png')
         self.nextimage = PhotoImage(file='./assets/next.png')
-        subprocess.Popen(['audacious', '-H', path], creationflags=subprocess.DETACHED_PROCESS, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        subprocess.Popen(['audacious', '-H', path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         mediaPlayButton = Button(playMediaWindow, image=self.playimage, width=160, command=subprocess.call(['audtool', '--playback-play']))
         mediaPlayButton.place(x=10, y=10)
         mediaPauseButton = Button(playMediaWindow, image=self.pauseimage, width=160, command=subprocess.call(['audtool', '--playback-pause']))
