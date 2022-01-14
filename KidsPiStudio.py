@@ -47,6 +47,7 @@ class MainWindow(Frame):
     def clickPlayMediaButton(self, path):
         if isinstance(self.mediaPlayer, MediaPlayer):
             self.mediaPlayer.destroy()
+            self.mediaPlayer = None
         self.mediaPlayer = MediaPlayer(self, path)
     def clickRipDiscButton(self):
         rip = subprocess.Popen(["abcde", "-G", "-N"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
