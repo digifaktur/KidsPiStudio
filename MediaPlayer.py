@@ -6,18 +6,17 @@
 # MediaPlayer.py
 # Simple UI for audacious / audtool
  
+from email.mime import base
 import subprocess
 from tkinter import *
 
 
 class MediaPlayer(Frame):
     def __init__(self, master=None, path=None):
-        subprocess.call(['killall', 'audacious'])
-        self.playMediaWindow = Toplevel(master)
-        self.playMediaWindow.geometry("720x320")
-        self.playMediaWindow.title("KidsPiStudio - Media Player")
-        self.playMediaWindow.protocol("WM_DELETE_WINDOW", self.closeWindow)
-        self.currentWindow = self.playMediaWindow
+        playMediaWindow = Toplevel(master)
+        playMediaWindow.geometry("720x320")
+        playMediaWindow.title("KidsPiStudio - Media Player")
+        playMediaWindow.protocol("WM_DELETE_WINDOW", self.closeWindow)
         self.playimage = PhotoImage(file='./assets/play.png')
         self.pauseimage = PhotoImage(file='./assets/pause.png')
         self.stopimage = PhotoImage(file='./assets/stop.png')
@@ -39,4 +38,4 @@ class MediaPlayer(Frame):
         closeButton.place(x=520, y=160)
     def closeWindow(self):
         subprocess.call(['killall', 'audacious'])
-        self.playMediaWindow.destroy()
+        self.destroy()
