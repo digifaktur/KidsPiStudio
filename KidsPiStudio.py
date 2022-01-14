@@ -1,4 +1,14 @@
+# Kids Pi Studio
+# A small audio recording studio for my children
+# GNU GPL v2
+# Created 2022 by Florian
+
+# KidsPiStudio.py
+# General UI
+
+import datetime
 import subprocess
+from time import sleep
 from tkinter import *
 from subprocess import Popen, PIPE
 from functools import partial
@@ -53,8 +63,35 @@ class MainWindow(Frame):
         recordWindow = Toplevel(self)
         recordWindow.geometry("720x320")
         recordWindow.title("KidsPiStudio - Recording Studio")
+        tenSecondsButton = Button(recordWindow, width=160, text='10 s', command=self.recordAudio(10))
+        tenSecondsButton.place(x=10, y=10)
+        twentySecondsButton = Button(recordWindow, width=160, text='20 s', command=self.recordAudio(20))
+        twentySecondsButton.place(x=10, y=160)
+        thirtySecondsButton = Button(recordWindow, width=160, text='30 s', command=self.recordAudio(30))
+        thirtySecondsButton.place(x=180, y=10)
+        oneMinuteButton = Button(recordWindow, width=160, text='1 min', command=self.recordAudio(60))
+        oneMinuteButton.place(x=180, y=160)
+        threeMinutesButton = Button(recordWindow, width=160, text='3 min', command=self.recordAudio(180))
+        threeMinutesButton.place(x=350, y=10)
         closeButton = Button(recordWindow, image=self.closeimage, width=160, command=recordWindow.destroy)
         closeButton.place(x=520, y=160)
+    def recordAudio(self, length):
+        countdownWindow = Toplevel(self)
+        countdownWindow.geometry("720x320")
+        countdownWindow.title("KidsPiStudio - Audio Recording")
+        countdownWindow.config(bg='skyblue4')
+        timeLabel = Label(countdownWindow, font=('Helvetica bold', 22), text='-3', bg='skyblue4', fg="red")
+        timeLabel.place(x=260, y=70)
+        date_time = datetime.datetime.now().strftime("%Y%m%d_%H-%M-%S")
+        for i in range (-3, -1):
+            timeLabel.config(text=i)
+            sleep(1)
+        subprocess.Popen(['arecord', date_time + '.wav', '-D sysdefault:CARD=1', '-f cd', '-d ' + str(length)], creationflags=subprocess.DETACHED_PROCESS, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        timeLabel.config(text='0', fg='green')
+        for i in range (0, length-1):
+            timeLabel.config(text=i)
+            sleep(1)
+        countdownWindow.destroy()
     def clickExitButton(self):
         exit()
 

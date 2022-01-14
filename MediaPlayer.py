@@ -1,5 +1,12 @@
+# Kids Pi Studio
+# A small audio recording studio for my children
+# GNU GPL v2
+# Created 2022 by Florian
+
+# MediaPlayer.py
+# Simple UI for audacious / audtool
+ 
 import subprocess
-import time
 from tkinter import *
 
 
@@ -17,8 +24,6 @@ class MediaPlayer(Frame):
         self.previmage = PhotoImage(file='./assets/prev.png')
         self.nextimage = PhotoImage(file='./assets/next.png')
         subprocess.Popen(['audacious', '-H', path], creationflags=subprocess.DETACHED_PROCESS, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
-        #time.sleep(3)
-        #subprocess.call(['audtool', '--playlist-addurl', path])
         mediaPlayButton = Button(playMediaWindow, image=self.playimage, width=160, command=subprocess.call(['audtool', '--playback-play']))
         mediaPlayButton.place(x=10, y=10)
         mediaPauseButton = Button(playMediaWindow, image=self.pauseimage, width=160, command=subprocess.call(['audtool', '--playback-pause']))
