@@ -87,8 +87,8 @@ class MainWindow(Frame):
             countdownWindow.update()
             sleep(1)
             seconds += 1
-        subprocess.Popen(['arecord', '/home/pi/Music/Recordings/' + date_time + '.wav', '-D sysdefault:CARD=1', '-f cd', '-d ' + str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
-        timeLabel.config(text='0', fg='green')
+        subprocess.Popen(['arecord', '/home/pi/Music/Recordings/' + date_time + '.wav', '-D', 'sysdefault:CARD=1', '-f', 'cd', '-d', str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        timeLabel.config(text='0', fg='chartreuse2')
         while seconds < length:
             timeLabel.config(text=str(seconds))
             countdownWindow.update()
