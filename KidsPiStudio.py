@@ -80,14 +80,17 @@ class MainWindow(Frame):
         timeLabel = Label(countdownWindow, font=('Helvetica bold', 72), text='-3', bg='skyblue4', fg='red')
         timeLabel.place(x=260, y=70)
         date_time = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
-        for i in range (-3, -1):
-            timeLabel.config(text=str(i))
+        seconds = -3
+        while seconds < 0:
+            timeLabel.config(text=str(seconds))
             sleep(1)
-        subprocess.Popen(['arecord', date_time + '.wav', '-D sysdefault:CARD=1', '-f cd', '-d ' + str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+            seconds += 1
+        subprocess.Popen(['arecord', '/home/pi/Music/Recordings/' + date_time + '.wav', '-D sysdefault:CARD=1', '-f cd', '-d ' + str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         timeLabel.config(text='0', fg='green')
-        for i in range (0, length-1):
-            timeLabel.config(text=str(i))
+        while seconds < length:
+            timeLabel.config(text=str(seconds))
             sleep(1)
+            seconds += 1
         countdownWindow.destroy()
     def clickExitButton(self):
         exit()
