@@ -81,19 +81,21 @@ class MainWindow(Frame):
         timeLabel.place(x=260, y=70)
         countdownWindow.wait_visibility()
         date_time = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
+        wavpath = '/home/pi/Music/Recordings/' + date_time + '.wav'
         seconds = -3
         while seconds < 0:
             timeLabel.config(text=str(seconds))
             countdownWindow.update()
             sleep(1)
             seconds += 1
-        subprocess.Popen(['arecord', '/home/pi/Music/Recordings/' + date_time + '.wav', '-D', 'sysdefault:CARD=1', '-f', 'cd', '-d', str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        subprocess.Popen(['arecord', wavpath, '-D', 'sysdefault:CARD=1', '-f', 'cd', '-d', str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         timeLabel.config(text='0', fg='chartreuse2')
         while seconds < length:
             timeLabel.config(text=str(seconds))
             countdownWindow.update()
             sleep(1)
             seconds += 1
+        self.clickPlayMediaButton(wavpath)
         countdownWindow.destroy()
     def clickExitButton(self):
         exit()
