@@ -1,3 +1,4 @@
+import os
 import subprocess
 from tkinter import *
 from MediaPlayer import MediaPlayer
@@ -16,6 +17,7 @@ class MainWindow(Frame):
         self.exitimage=PhotoImage(file='./assets/exit.png')
         self.closeimage=PhotoImage(file='./assets/close.png')
         self.mediaPlayer = None
+        self.buttonCount = 0
         discButton = Button(self, image=self.cdimage, width=160, command=self.clickDiscButton)
         discButton.place(x=10, y=10)
         notesButton = Button(self, image=self.notesimage, width=160, command=self.clickNotesButton)
@@ -44,6 +46,9 @@ class MainWindow(Frame):
         notesWindow = Toplevel(self)
         notesWindow.geometry("720x320")
         notesWindow.title("KidsPiStudio - MP3 Studio")
+        self.createButtons(notesWindow, self.buttonCount)
+        navButton = Button(notesWindow, image=self.arrowimage, width=150, command=lambda : self.createButtons(notesWindow))
+        navButton.place(x=520, y=10)
         closeButton = Button(notesWindow, image=self.closeimage, width=160, command=notesWindow.destroy)
         closeButton.place(x=520, y=160)
     def clickRecordButton(self):
@@ -54,7 +59,32 @@ class MainWindow(Frame):
         closeButton.place(x=520, y=160)
     def clickExitButton(self):
         exit()
-
+    def createButtons(self, wnd):
+        cnt = 0
+        for currentdir, subdirs, files in os.walk('~/Music'):
+            for dirname in subdirs:
+                if cnt < self.buttonCount:
+                    cnt += 1
+                    continue
+                jpath = os.path.join(currentdir, dirname, 'cover.jpg')
+                ppath = os.path.join(currentdir, dirname, 'cover.png')
+                icon = self.notesimage
+                if os.path.exists(jpath) and not os.path.exists(ppath):
+                    cover = Image.open(jpath)
+                    w, h = cover.size
+                    if w > 140:
+                        ratio = (140, h * (140 / w))
+                        cover = cover.resize(ratio)
+                        cover.save(ppath)
+                if os.path.exists(ppath):
+                    icon = PhotoImage(file=ppath)
+                tmpButton = Button(wnd, image=icon, width=160, command=lambda : self.clickPlayMediaButton(os.path.join(currentdir, dirname)))
+                tmpButton.place(x=10 + ((self.buttonCount % 4) // 2) * 170, y=10 + (self.buttonCount % 2) * 150)
+                self.buttonCount += 1
+                if self.buttonCount % 4 == 0:
+                    break
+            if self.buttonCount % 4 == 0:
+                break
 
 
 root = Tk()
