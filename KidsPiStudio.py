@@ -1,5 +1,15 @@
+# Kids Pi Studio
+# A small audio recording studio for my children
+# GNU GPL v2
+# Created 2022 by Florian
+
+# KidsPiStudio.py
+# General UI
+
 import os
+import datetime
 import subprocess
+from time import sleep
 from tkinter import *
 from MediaPlayer import MediaPlayer
 
@@ -37,11 +47,9 @@ class MainWindow(Frame):
         closeButton = Button(discWindow, image=self.closeimage, width=160, command=discWindow.destroy)
         closeButton.place(x=520, y=160)
     def clickPlayMediaButton(self, path):
-        if isinstance(self.mediaPlayer, MediaPlayer):
-            self.mediaPlayer.closeWindow(self.mediaPlayer)
         self.mediaPlayer = MediaPlayer(self, path)
     def clickRipDiscButton(self):
-        rip = subprocess.Popen(["abcde", "-G", "-N"], creationflags=subprocess.DETACHED_PROCESS, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        rip = subprocess.Popen(["abcde", "-G", "-N"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     def clickNotesButton(self):
         notesWindow = Toplevel(self)
         notesWindow.geometry("720x320")
@@ -55,8 +63,43 @@ class MainWindow(Frame):
         recordWindow = Toplevel(self)
         recordWindow.geometry("720x320")
         recordWindow.title("KidsPiStudio - Recording Studio")
+        tenSecondsButton = Button(recordWindow, text='10 s', font=('Helvetica bold', 36), fg='green', command=lambda : self.recordAudio(10))
+        tenSecondsButton.place(x=10, y=10)
+        twentySecondsButton = Button(recordWindow, text='20 s', font=('Helvetica bold', 36), fg='green', command=lambda : self.recordAudio(20))
+        twentySecondsButton.place(x=10, y=160)
+        thirtySecondsButton = Button(recordWindow, text='30 s', font=('Helvetica bold', 36), fg='green', command=lambda : self.recordAudio(30))
+        thirtySecondsButton.place(x=180, y=10)
+        oneMinuteButton = Button(recordWindow, text='1 min', font=('Helvetica bold', 36), fg='green', command=lambda : self.recordAudio(60))
+        oneMinuteButton.place(x=180, y=160)
+        threeMinutesButton = Button(recordWindow, text='3 min', font=('Helvetica bold', 36), fg='green', command=lambda : self.recordAudio(180))
+        threeMinutesButton.place(x=350, y=10)
         closeButton = Button(recordWindow, image=self.closeimage, width=160, command=recordWindow.destroy)
         closeButton.place(x=520, y=160)
+    def recordAudio(self, length):
+        countdownWindow = Toplevel(self)
+        countdownWindow.geometry("720x320")
+        countdownWindow.title("KidsPiStudio - Audio Recording")
+        countdownWindow.config(bg='skyblue4')
+        timeLabel = Label(countdownWindow, font=('Helvetica bold', 72), text='-3', bg='skyblue4', fg='red')
+        timeLabel.place(x=260, y=70)
+        countdownWindow.wait_visibility()
+        date_time = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
+        wavpath = '/home/pi/Music/Recordings/' + date_time + '.wav'
+        seconds = -3
+        while seconds < 0:
+            timeLabel.config(text=str(seconds))
+            countdownWindow.update()
+            sleep(1)
+            seconds += 1
+        subprocess.Popen(['arecord', wavpath, '-D', 'sysdefault:CARD=1', '-f', 'cd', '-d', str(length)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        timeLabel.config(text='0', fg='chartreuse2')
+        while seconds < length:
+            timeLabel.config(text=str(seconds))
+            countdownWindow.update()
+            sleep(1)
+            seconds += 1
+        self.clickPlayMediaButton(wavpath)
+        countdownWindow.destroy()
     def clickExitButton(self):
         exit()
     def createButtons(self, wnd):
