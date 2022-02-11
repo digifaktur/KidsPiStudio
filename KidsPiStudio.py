@@ -12,6 +12,7 @@ import subprocess
 from time import sleep
 from tkinter import *
 from MediaPlayer import MediaPlayer
+from Album import Album
 
 class MainWindow(Frame):
     def __init__(self, master=None):
@@ -28,6 +29,7 @@ class MainWindow(Frame):
         self.closeimage=PhotoImage(file='./assets/close.png')
         self.mediaPlayer = None
         self.buttonCount = 0
+        self.albums = []
         discButton = Button(self, image=self.cdimage, width=160, command=self.clickDiscButton)
         discButton.place(x=10, y=10)
         notesButton = Button(self, image=self.notesimage, width=160, command=self.clickNotesButton)
@@ -54,9 +56,26 @@ class MainWindow(Frame):
         notesWindow = Toplevel(self)
         notesWindow.geometry("720x320")
         notesWindow.title("KidsPiStudio - MP3 Studio")
-        self.createButtons(notesWindow, self.buttonCount)
-        navButton = Button(notesWindow, image=self.arrowimage, width=150, command=lambda : self.createButtons(notesWindow))
-        navButton.place(x=520, y=10)
+        self.albums.clear()
+        for currentdir, subdirs, files in os.walk('~/Music'):
+            for dirname in subdirs:
+                self.albums.append(Album(dirname))
+        if (self.albums.count > 0):
+            a1Button = Button(notesWindow, image=self.albums[self.buttonCount].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount].albumpath))
+            a1Button.place(x=10, y=10)
+            if (self.albums.count > 1):
+                a2Button = Button(notesWindow, image=self.albums[self.buttonCount + 1].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 1].albumpath))
+                a2Button.place(x=180, y=10)
+                if (self.albums.count > 2):
+                    a3Button = Button(notesWindow, image=self.albums[self.buttonCount + 2].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 2].albumpath))
+                    a3Button.place(x=350, y=10)
+                    if (self.albums.count > 3):
+                        a4Button = Button(notesWindow, image=self.albums[self.buttonCount + 3].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 3].albumpath))
+                        a4Button.place(x=520, y=10)
+        navButtonleft = Button(notesWindow, image=self.arrowleftimage, width=150, command=lambda : self.navigate(4, a1Button, a2Button, a3Button, a4Button))
+        navButtonleft.place(x=10, y=160)
+        navButtonright = Button(notesWindow, image=self.arrowrightimage, width=150, command=lambda : self.navigate(-4, a1Button, a2Button, a3Button, a4Button))
+        navButtonright.place(x=180, y=160)
         closeButton = Button(notesWindow, image=self.closeimage, width=160, command=notesWindow.destroy)
         closeButton.place(x=520, y=160)
     def clickRecordButton(self):
@@ -100,34 +119,22 @@ class MainWindow(Frame):
             seconds += 1
         self.clickPlayMediaButton(wavpath)
         countdownWindow.destroy()
+    def navigate(self, cnt, b1 : Button, b2 : Button, b3 : Button, b4 : Button):
+        self.buttonCount += cnt
+        if self.buttonCount < 0 or self.buttonCount > (self.albums.count() - cnt):
+            self.buttonCount = self.albums.count() - abs(cnt)
+        b1.config(image=self.albums[self.buttonCount].albumicon)
+        b1.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount].albumpath))
+        b2.config(image=self.albums[self.buttonCount + 1].albumicon)
+        b2.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 1].albumpath))
+        b3.config(image=self.albums[self.buttonCount + 2].albumicon)
+        b3.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 2].albumpath))
+        b4.config(image=self.albums[self.buttonCount + 3].albumicon)
+        b4.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 3].albumpath))
     def clickExitButton(self):
         exit()
-    def createButtons(self, wnd):
-        cnt = 0
-        for currentdir, subdirs, files in os.walk('~/Music'):
-            for dirname in subdirs:
-                if cnt < self.buttonCount:
-                    cnt += 1
-                    continue
-                jpath = os.path.join(currentdir, dirname, 'cover.jpg')
-                ppath = os.path.join(currentdir, dirname, 'cover.png')
-                icon = self.notesimage
-                if os.path.exists(jpath) and not os.path.exists(ppath):
-                    cover = Image.open(jpath)
-                    w, h = cover.size
-                    if w > 140:
-                        ratio = (140, h * (140 / w))
-                        cover = cover.resize(ratio)
-                        cover.save(ppath)
-                if os.path.exists(ppath):
-                    icon = PhotoImage(file=ppath)
-                tmpButton = Button(wnd, image=icon, width=160, command=lambda : self.clickPlayMediaButton(os.path.join(currentdir, dirname)))
-                tmpButton.place(x=10 + ((self.buttonCount % 4) // 2) * 170, y=10 + (self.buttonCount % 2) * 150)
-                self.buttonCount += 1
-                if self.buttonCount % 4 == 0:
-                    break
-            if self.buttonCount % 4 == 0:
-                break
+        
+        
 
 
 root = Tk()
