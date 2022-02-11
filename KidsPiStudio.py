@@ -27,6 +27,8 @@ class MainWindow(Frame):
         self.recordimage=PhotoImage(file='./assets/record.png')
         self.exitimage=PhotoImage(file='./assets/exit.png')
         self.closeimage=PhotoImage(file='./assets/close.png')
+        self.arrowleftimage=PhotoImage(file='./assets/prev.png')
+        self.arrowrightimage=PhotoImage(file='./assets/next.png')
         self.mediaPlayer = None
         self.buttonCount = 0
         self.albums = []
