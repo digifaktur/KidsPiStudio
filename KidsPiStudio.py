@@ -59,9 +59,8 @@ class MainWindow(Frame):
         notesWindow.geometry("720x320")
         notesWindow.title("KidsPiStudio - MP3 Studio")
         self.albums.clear()
-        for currentdir, subdirs, files in os.walk('~/Music'):
-            for dirname in subdirs:
-                self.albums.append(Album(dirname))
+        for dirname in [f.path for f in os.scandir(os.path.join(os.path.expanduser('~'), 'Music')) if f.is_dir()]:
+            self.albums.append(Album(dirname))
         if (len(self.albums) > 0):
             a1Button = Button(notesWindow, image=self.albums[self.buttonCount].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount].albumpath))
             a1Button.place(x=10, y=10)
