@@ -60,16 +60,16 @@ class MainWindow(Frame):
         for currentdir, subdirs, files in os.walk('~/Music'):
             for dirname in subdirs:
                 self.albums.append(Album(dirname))
-        if (self.albums.count > 0):
+        if (len(self.albums) > 0):
             a1Button = Button(notesWindow, image=self.albums[self.buttonCount].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount].albumpath))
             a1Button.place(x=10, y=10)
-            if (self.albums.count > 1):
+            if (len(self.albums) > 1):
                 a2Button = Button(notesWindow, image=self.albums[self.buttonCount + 1].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 1].albumpath))
                 a2Button.place(x=180, y=10)
-                if (self.albums.count > 2):
+                if (len(self.albums) > 2):
                     a3Button = Button(notesWindow, image=self.albums[self.buttonCount + 2].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 2].albumpath))
                     a3Button.place(x=350, y=10)
-                    if (self.albums.count > 3):
+                    if (len(self.albums) > 3):
                         a4Button = Button(notesWindow, image=self.albums[self.buttonCount + 3].albumicon, width=150, command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 3].albumpath))
                         a4Button.place(x=520, y=10)
         navButtonleft = Button(notesWindow, image=self.arrowleftimage, width=150, command=lambda : self.navigate(4, a1Button, a2Button, a3Button, a4Button))
