@@ -59,6 +59,10 @@ class MainWindow(Frame):
         notesWindow.geometry("720x320")
         notesWindow.title("KidsPiStudio - MP3 Studio")
         self.albums.clear()
+        a1Button = None;
+        a2Button = None;
+        a3Button = None;
+        a4Button = None;
         for dirname in [f.path for f in os.scandir(os.path.join(os.path.expanduser('~'), 'Music')) if f.is_dir()]:
             self.albums.append(Album(dirname))
         if (len(self.albums) > 0):
@@ -124,14 +128,18 @@ class MainWindow(Frame):
         self.buttonCount += cnt
         if self.buttonCount < 0 or self.buttonCount > (self.albums.count() - cnt):
             self.buttonCount = self.albums.count() - abs(cnt)
-        b1.config(image=self.albums[self.buttonCount].albumicon)
-        b1.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount].albumpath))
-        b2.config(image=self.albums[self.buttonCount + 1].albumicon)
-        b2.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 1].albumpath))
-        b3.config(image=self.albums[self.buttonCount + 2].albumicon)
-        b3.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 2].albumpath))
-        b4.config(image=self.albums[self.buttonCount + 3].albumicon)
-        b4.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 3].albumpath))
+        if isinstance(b1, Button):
+            b1.config(image=self.albums[self.buttonCount].albumicon)
+            b1.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount].albumpath))
+            if isinstance(b2, Button):
+                b2.config(image=self.albums[self.buttonCount + 1].albumicon)
+                b2.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 1].albumpath))
+                if isinstance(b3, Button):
+                    b3.config(image=self.albums[self.buttonCount + 2].albumicon)
+                    b3.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 2].albumpath))
+                    if isinstance(b4, Button):
+                        b4.config(image=self.albums[self.buttonCount + 3].albumicon)
+                        b4.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount + 3].albumpath))
     def clickExitButton(self):
         exit()
         
