@@ -126,8 +126,8 @@ class MainWindow(Frame):
         countdownWindow.destroy()
     def navigate(self, cnt, b1 : Button, b2 : Button, b3 : Button, b4 : Button):
         self.buttonCount += cnt
-        if self.buttonCount < 0 or self.buttonCount > (self.albums.count() - cnt):
-            self.buttonCount = self.albums.count() - abs(cnt)
+        if self.buttonCount < 0 or self.buttonCount > (len(self.albums) - cnt):
+            self.buttonCount = len(self.albums) - abs(cnt)
         if isinstance(b1, Button):
             b1.config(image=self.albums[self.buttonCount].albumicon)
             b1.config(command=lambda : self.clickPlayMediaButton(self.albums[self.buttonCount].albumpath))
